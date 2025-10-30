@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ThinkLynk - Welcome</title>
+    <link rel="stylesheet" href="./static/index.css">
+<body>
+    <div class="welcome-container">
+        <h1>Welcome to ThinkLynk</h1>
+        <p>Join the platform that connects students and educators seamlessly.</p>
+        <div class="button-container">
+            <a href="{{ url_for('login') }}" class="login-btn">Login</a>
+            <a href="{{ url_for('signup') }}" class="signup-btn">Signup</a>
+        </div>
+    </div>
+</body>
+</html>

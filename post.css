@@ -1,0 +1,153 @@
+/* Slight rounded corners */
+:root {
+  --rounded-corner: 6px;
+}
+
+/* Base styling */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to bottom, #f9f9f9, #ffffff);
+  color: #333;
+}
+
+/* Navbar */
+.navbar {
+  background: linear-gradient(135deg, #ff8a00, #e52e71);
+  padding: 15px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
+  border-radius: var(--rounded-corner);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.navbar h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+.navbar a {
+  font-family: 'Poppins', sans-serif;
+  color: white;
+  text-decoration: none;
+  margin: 0 12px;
+  font-size: 16px;
+  transition: all 0.3s ease-in-out;
+}
+
+.navbar a:hover {
+  transform: scale(1.05);
+  text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.6);
+}
+
+/* Main container */
+.container {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: var(--rounded-corner);
+  animation: fadeIn 0.6s ease-in-out;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Title */
+h2 {
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  background: linear-gradient(to right, #e52e71, #ff8a00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Grade table */
+.grade-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.grade-table th,
+.grade-table td {
+  padding: 16px 20px;
+  text-align: left;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(5px);
+  font-size: 15px;
+  border-radius: var(--rounded-corner);
+}
+
+.grade-table th {
+  background-color: rgba(229, 46, 113, 0.85);
+  color: #fff;
+  font-weight: 600;
+}
+
+.grade-table tr:hover td {
+  background-color: rgba(255, 138, 0, 0.1);
+  transition: background 0.3s ease;
+}
+
+/* Inputs and Textareas */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea,
+select {
+  font-family: 'Poppins', sans-serif;
+  padding: 12px 16px;
+  border: 1px solid #ccc;
+  background: rgba(255, 255, 255, 0.9);
+  width: 100%;
+  box-sizing: border-box;
+  outline: none;
+  border-radius: var(--rounded-corner);
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+/* Buttons */
+button,
+input[type="submit"] {
+  background: linear-gradient(135deg, #ff8a00, #e52e71);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: var(--rounded-corner);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+button:hover,
+input[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

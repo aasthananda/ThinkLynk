@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post Media</title>
+  <link rel="stylesheet" href="./static/post.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="navbar">
+    <h1>ThinkLynkt</h1>
+    <a href="{{ url_for('profile') }}">Profile</a>
+    <a href="{{ url_for('assignment') }}">Assignment</a>
+    <a href="{{ url_for('grades') }}">Grades</a>
+    <a href="{{ url_for('message') }}">Messages</a>
+    <a href="{{ url_for('post') }}">Post</a>
+    <a href="{{ url_for('dashboard') }}">Dashboard</a>
+    <a href="{{ url_for('classes') }}">Classes</a>
+  </div>
+
+  <div class="container">
+    <form action="/post" method="POST">
+      <div class="post-section">
+        <input name="post_name" type="text" class="text-input" placeholder="Post name">
+        <textarea name="description" class="text-input" placeholder="Post description"></textarea>
+        <input name="link" type="text" class="text-input" placeholder="Insert link">
+        <input name="classname" type="text" class="text-input" placeholder="Class name">
+        <input name="classcode" type="text" class="text-input" placeholder="Class code">
+        <div class="post-options">
+          <button type="button" id="post-btn">Submit Post</button>
+        </div>
+      </div>
+    </form>
+
+    <div class="preview" id="preview"></div>
+    <div id="posts"></div>
+  </div>
+
+  <div id="post-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Post Details</h2>
+        <span class="close" onclick="closeModal()">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div id="modal-content"></div>
+        <div class="post-options">
+          <button id="edit-btn">Edit</button>
+          <button id="delete-btn">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function closeModal() {
+      document.getElementById('post-modal').style.display = 'none';
+    }
+
+    function openModal(content) {
+      document.getElementById('modal-content').innerHTML = content;
+      document.getElementById('post-modal').style.display = 'flex';
+    }
+
+    document.getElementById('post-btn').addEventListener('click', function () {
+      const content = document.querySelector('textarea').value;
+      const postsContainer = document.getElementById('posts');
+      if (content) {
+        const post = document.createElement('div');
+        post.className = 'post';
+        post.innerHTML = `
+          <p>${content}</p>
+          <div class="reactions">
+            <span>👍</span>
+            <span>❤️</span>
+            <span>🔁</span>
+          </div>
+          <button onclick="openModal('${content.replace(/'/g, "\\'")}')">View Details</button>
+        `;
+        postsContainer.appendChild(post);
+        document.querySelector('textarea').value = '';
+      }
+    });
+  </script>
+</body>
+</html>

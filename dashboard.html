@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ThinkLynk</title>
+  <link rel="stylesheet" href="./static/dashboard.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+</head>
+<body>
+
+  <div class="navbar">
+    <h1>ThinkLynk</h1>
+    <a href="{{ url_for('profile') }}">
+      Profile     
+    </a>
+    <a href="{{ url_for('grades') }}">    
+      Grades
+    </a>
+    <a href="{{ url_for('message') }}">
+      Messages
+    </a>
+    {% if user["role"] == "teacher" %}
+    <a href="{{ url_for('post') }}">Post</a>
+    <a href="{{url_for('assignment')}}">Assignment</a>
+    {% endif %}
+    <a href="{{ url_for('dashboard') }}">Dashboard</a>
+    <a href="{{ url_for('classes') }}">Classes</a>
+  </div>
+
+  <div class="container">
+    <div class="sidebar">
+      <div class="profile-section">
+        <img src="https://via.placeholder.com/80" alt="Profile Picture" class="profile-pic"/>
+        <h2>{{user.name}}</h2>
+        <p>{{user.bio}}</p>
+        <a href="{{ url_for('profile') }}">View Profile</a>
+        <div class="stats">
+          <div>
+            <span>Classes</span>
+            {%for each in enrolled_classes%}
+              <div class="information">
+                <p>{{each["classname"]}}</p>
+              </div>
+            {%endfor%}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="trending">
+        <h2>Daily Motivation</h2>
+        <p style="font-size: 1.4em; font-style: italic; color: #333;">
+          {{ quote }}
+        </p>
+      </div>
+     
+      {%if posts%}
+        {%for p in posts%}
+        <div id="posts">
+          <div class="post">
+            <p>{{p["postname"]}}</p>
+            <iframe src="https://www.youtube.com/embed/{{ p['postlink'] }}" frameborder="0" allowfullscreen></iframe>
+            <p>{{p["desc"]}}</p>
+          </div>
+        </div>
+        {%endfor%}
+      {%endif%}
+
+      {%if assign%}
+        {%for a in assign%}
+        <div id="posts">
+          <div class="post">
+            <p>{{a["name"]}}</p>
+            <p>{{a["filename"]}}</p>
+            <a href="/static/uploads/{{a['filename']}}" target="_blank">
+              <i class="fas fa-file-pdf"></i>
+            </a>
+          </div>
+        </div>
+        {%endfor%}
+      {%endif%}
+    </div>
+
+    <!-- Redesigned Study Checklist -->
+    <div class="sidebar">
+      <div class="profile-section">
+        <h3>My Study Checklist</h3>
+        <input type="text" id="new-tip-input" placeholder="new study tips..." />
+        <button id="add-tip-btn">Add</button>
+
+        <ul id="study-tips-list"></ul>
+
+        <button id="clear-checklist">Clear All</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
+
+<script>
+  const tipInput = document.getElementById('new-tip-input');
+  const addTipBtn = document.getElementById('add-tip-btn');
+  const tipsList = document.getElementById('study-tips-list');
+  const clearBtn = document.getElementById('clear-checklist');
+
+  addTipBtn.addEventListener('click', () => {
+    const tipText = tipInput.value.trim();
+    if (tipText === '') return;
+
+    const li = document.createElement('li');
+    li.innerHTML = `
+      <label>
+        <input type="checkbox" class="tip-checkbox" />
+        ${tipText}
+      </label>
+      <button class="delete-tip-btn" style="margin-left:10px;">❌</button>
+    `;
+    tipsList.appendChild(li);
+    tipInput.value = '';
+  });
+
+  tipInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      addTipBtn.click();
+    }
+  });
+
+  clearBtn.addEventListener('click', () => {
+    tipsList.innerHTML = '';
+  });
+
+  tipsList.addEventListener('click', (e) => {
+    if (e.target.classList.contains('delete-tip-btn')) {
+      e.target.parentElement.remove();
+    }
+  });
+</script>

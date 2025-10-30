@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Profile - ThinkLynk</title>
+    <link rel="stylesheet" href="./static/edit_profile.css">
+</head>
+<body>
+
+  <div class="navbar">
+    <h1>ThinkLynk</h1>
+    <a href="{{ url_for('profile') }}">Profile</a>
+    <a href="{{ url_for('grades') }}">Grades</a>
+    <a href="{{ url_for('message') }}">Messages</a>
+    {% if data["role"] == "teacher" %}
+    <a href="{{ url_for('post') }}">Post</a>
+    <a href="{{url_for('assignment')}}">Assignment</a>
+    {% endif %}
+    <a href="{{ url_for('dashboard') }}">Dashboard</a>
+    <a href="{{ url_for('classes') }}">Classes</a>
+  </div>
+
+  <div class="container">
+    <div class="edit-profile-container">
+      <h2>Edit Your Profile</h2>
+      <form action="/save" method="POST">
+
+        <label for="full-name">Full Name</label>
+        <input type="text" id="full-name" value ="{{data.name}}" name="full-name">
+
+        <label for="phone">Phone</label>
+        <input type="tel" id="phone" value = "{{data.number}}" name="phone">
+
+        <label for="bio">Bio</label>
+        <textarea id="bio" name="bio" rows="4">{{data.bio}}</textarea>
+
+        <label for="profile-picture">Profile Picture</label>
+        <input type="file" id="profile-picture" name="profile-picture">
+        <button type="submit"> Save changes</button>
+      </form>
+    </div>
+  </div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ThinkLynk Messages</title>
+    <link rel="stylesheet" href="./static/message.css">
+    
+</head>
+<body>
+
+  <div class="navbar">
+    <h1>ThinkLynk</h1>
+    <a href="{{ url_for('profile') }}">Profile</a>
+    <a href="{{ url_for('grades') }}">Grades</a>
+    <a href="{{ url_for('message') }}">Messages</a>
+    {% if user["role"] == "teacher" %}
+    <a href="{{ url_for('post') }}">Post</a>
+    <a href="{{url_for('assignment')}}">Assignment</a>
+    {% endif %}
+    <a href="{{ url_for('dashboard') }}">Dashboard</a>
+    <a href="{{ url_for('classes') }}">Classes</a>
+  </div>
+  <div class="container">
+    <div class="sidebar">
+      <h3>Your Contacts</h3>
+      <ul id="users">
+        {% for user in users %}
+        <li {% if selected_recipient == user.email %}class="active"{% endif %}>
+          <a href="{{ url_for('message', recipient=user.email) }}">
+            <img src="https://via.placeholder.com/60">
+            <div class="contact-details">
+              <span class="contact-name">{{ user.name }}</span>
+            </div>
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="main-content">
+      {% if selected_recipient %}
+        <div class="chat-header">
+          <img src="https://via.placeholder.com/40" alt="Contact Picture">
+          <h2>Chat with: {{ selected_user.name }}</h2>
+        </div>
+
+        <div class="messages">
+          {% for message in messages %}
+            <div class="message {% if message.sender == current_user.email %}sent{% else %}received{% endif %}">
+              <strong>{{ message.sender }}:</strong> {{ message.content }}
+              <small>{{ message.timestamp.strftime('%H:%M') }}</small>
+            </div>
+          {% endfor %}
+        </div>
+
+        <form class="input-area">
+          <input type="hidden" name="recipient" value="{{ selected_recipient }}">
+          <textarea name="message" placeholder="Type your message..." rows="2" required></textarea>
+          <button type="submit">Send</button>
+        </form>
+      {% else %}
+        <div class="messages">
+          <p>Please select a contact to start chatting.</p>
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="right-sidebar">
+      <div class="notifications">
+        <h3>New Messages</h3>
+        <p>Select a contact to view messages</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const messageForm = document.querySelector('.input-area');
+    const messagesDiv = document.querySelector('.messages');
+    const currentUserEmail = "{{ current_user.email }}";
+    let lastMessageTimestamp = null;
+    let displayedMessageIds = new Set(); // Track displayed message IDs
+
+    function formatTime(timestamp) {
+        if (!timestamp) return '';
+        try {
+            const date = new Date(timestamp);
+            if (isNaN(date.getTime())) return '';
+            return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        } catch (e) {
+            return '';
+        }
+    }
+
+    function addMessage(message, sender, timestamp, messageId) {
+        // Check if message is already displayed
+        if (displayedMessageIds.has(messageId)) {
+            return;
+        }
+
+        const messageElement = document.createElement('div');
+        messageElement.className = `message ${sender === currentUserEmail ? 'sent' : 'received'}`;
+        const formattedTime = formatTime(timestamp);
+        messageElement.innerHTML = `
+            <strong>${sender}:</strong> ${message}
+            <small>${formattedTime}</small>
+        `;
+        messagesDiv.appendChild(messageElement);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        lastMessageTimestamp = timestamp;
+        displayedMessageIds.add(messageId); // Add message ID to tracking set
+    }
+
+    function fetchMessages() {
+        const recipient = "{{ selected_recipient }}";
+        if (recipient) {
+            const url = lastMessageTimestamp 
+                ? `/get_messages/${recipient}?after=${lastMessageTimestamp}`
+                : `/get_messages/${recipient}`;
+                
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.messages.length > 0) {
+                        data.messages.forEach(msg => {
+                            addMessage(msg.content, msg.sender, msg.timestamp, msg._id);
+                        });
+                    }
+                });
+        }
+    }
+
+    messageForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const messageInput = this.querySelector('textarea[name="message"]');
+        const recipient = this.querySelector('input[name="recipient"]').value;
+        const message = messageInput.value.trim();
+
+        if (message) {
+            messageInput.value = '';
+            
+            fetch('/send_message', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    recipient: recipient,
+                    message: message
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Add message with its ID from the server response
+                    addMessage(message, currentUserEmail, data.timestamp, data.message_id);
+                }
+            });
+        }
+    });
+
+    setInterval(fetchMessages, 1000);
+    fetchMessages();
+
+    // Enable enter key to send message
+    messageForm.querySelector('textarea').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            messageForm.dispatchEvent(new Event('submit'));
+        }
+    });
+  </script>
+</body>
+</html>

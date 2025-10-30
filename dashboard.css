@@ -1,0 +1,315 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: linear-gradient(to bottom, #f9f9f9, #ffffff); 
+  color: #333; 
+}
+
+.navbar {
+  background: linear-gradient(135deg, #ff8a00, #e52e71); 
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.navbar h1 {
+  font-size: 24px;
+  letter-spacing: 1px;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  margin: 0 12px;
+  font-size: 16px;
+  transition: all 0.3s ease-in-out;
+}
+
+.navbar a:hover {
+  transform: scale(1.1);
+  text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8);
+}
+
+.search-bar {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 8px 15px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  backdrop-filter: blur(10px);
+}
+
+.search-bar input {
+  border: none;
+  outline: none;
+  background: transparent;
+  color: white;
+  font-size: 14px;
+}
+
+.search-bar img {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  width: 90%;
+  max-width: 1400px;
+  margin: 30px auto;
+  gap: 30px;
+}
+
+.sidebar {
+  width: 22%;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(15px);
+}
+
+.profile-section {
+  text-align: center;
+}
+
+.profile-pic {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  border: 3px solid white;
+}
+
+.profile-section button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(to right, #ff5f6d, #ffc371);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.profile-section button:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+}
+
+.main-content {
+  width: 64%; /* made wider */
+  background: rgba(255, 255, 255, 0.15);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(15px);
+}
+
+.trending h2 {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 14px;
+  background: linear-gradient(to right, #e52e71, #ff8a00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.1);
+}
+
+.trending p {
+  font-size: 1.4em;
+  font-style: italic;
+  font-weight: 500;
+  color: white;
+  padding: 18px 24px;
+  border-radius: 16px;
+  background: linear-gradient(to right, rgba(229, 46, 113, 0.65), rgba(255, 138, 0, 0.65));
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  line-height: 1.7;
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+}
+
+
+
+
+
+
+
+.trending h3 {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.trending ul {
+  list-style-type: none;
+}
+
+.trending ul li {
+  font-size: 14px;
+  margin-top: 5px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.trending ul li:hover {
+  transform: scale(1.05);
+  color: white;
+}
+
+.post-creation textarea {
+  width: 100%;
+  height: 90px;
+  border-radius: 10px;
+  border: none;
+  padding: 10px;
+  font-size: 14px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #333;
+  backdrop-filter: blur(10px);
+}
+
+.post-options {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.post-options button {
+  padding: 12px 20px;
+  background: linear-gradient(to right, #ff5f6d, #ffc371);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.post-options button:hover {
+  transform: scale(1.05);
+}
+
+.post {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.post iframe {
+  width: 100%;
+  height: 315px;
+  border-radius: 10px;
+}
+
+.right-sidebar {
+  width: 22%;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(15px);
+}
+
+.weather-widget,
+.notifications {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.gallery img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.sidebar,
+.main-content,
+.right-sidebar {
+  animation: fadeIn 0.8s ease-in-out;
+}
+.study-tips-section {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+  max-width: 400px;
+}
+
+#new-tip-input {
+  width: 70%;
+  padding: 6px;
+  font-size: 16px;
+}
+
+#add-tip-btn {
+  padding: 6px 12px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#study-tips-list {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 15px;
+}
+
+#study-tips-list li {
+  margin: 8px 0;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tip-checkbox {
+  margin-right: 10px;
+}
+
+.delete-tip-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: red;
+}
+
+.fas.fa-file-pdf {
+  font-size: 32px;
+}

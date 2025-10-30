@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ThinkLynk Profile</title>
+    <link rel="stylesheet" href="./static/profile.css">
+</head>
+<body>
+    <div class="navbar">
+      <h1>ThinkLynkt</h1>
+      <a href="{{ url_for('profile') }}">Profile</a>
+      <a href="{{ url_for('grades') }}">Grades</a>
+      <a href="{{ url_for('message') }}">Messages</a>
+      {% if data["role"] == "teacher" %}
+      <a href="{{ url_for('post') }}">Post</a>
+      <a href="{{url_for('assignment')}}">Assignment</a>
+      {% endif %}
+      <a href="{{ url_for('dashboard') }}">Dashboard</a>
+      <a href="{{ url_for('classes') }}">Classes</a>
+    </div>
+ </div>
+  <div class="container">
+    <div class="profile-container">
+      <div class="profile-header">
+        <img src="https://via.placeholder.com/120" alt="Profile Picture">
+        <h2>{{data.name}}</h2>
+      </div>
+
+      <div class="info-section">
+        <div class="info-item">
+          <h4>Full Name:</h4>
+          <p>{{data.name}}</p>
+        </div>
+        <div class="info-item">
+          <h4>Email:</h4>
+          <p>{{data.email}}</p>
+        </div>
+        <div class="info-item">
+          <h4>Phone:</h4>
+          <p>{{data.number}}</p>
+        </div>
+        <div class="info-item">
+          <h4>Location:</h4>
+          <p>{{data.location}}</p>
+        </div>
+        <div class="info-item">
+          <h4>Bio:</h4>
+          <p>{{data.bio}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>Want to update your profile? <a href="{{ url_for('edit_profile') }}">Edit your profile</a></p>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ThinkLynk</title>
+    <link rel="stylesheet" href="./static/post.css">
+</head>
+<body>
+    <div class="navbar">
+        <h1>ThinkLynkt</h1>
+        <a href="{{ url_for('profile') }}">Profile</a>
+        <a href="{{ url_for('grades') }}">Grades</a>
+        <a href="{{ url_for('message') }}">Messages</a>
+        {% if user["role"] == "teacher" %}
+        <a href="{{ url_for('post') }}">Post</a>
+        <a href="{{url_for('assignment')}}">Assignment</a>
+        {% endif %}
+        <a href="{{ url_for('dashboard') }}">Dashboard</a>
+        <a href="{{ url_for('classes') }}">Classes</a>
+      </div>
+    <div class="container mt-4">
+        <h2>Create New Assignment</h2>
+        <form  method="POST" enctype="multipart/form-data" class="border p-3 rounded mb-4">
+            <input name="name" class="form-control mb-2" placeholder="name">
+            <label class="form-label">Upload PDF</label>
+            <input type="file" name="pdf" accept=".pdf" class="form-control mb-3">
+            <div class="tags">
+                <input name = "classcode" type="text" id="post-content" placeholder="class code">
+                <input name="max_points" type="number" class="form-control mb-2" placeholder="Maximum Points">
+            <div id="tags-container"></div>
+            <button type="submit" class="btn btn-dark  w-100">Upload Assignment</button>
+        </form>
+
+    </div>
+</body>
+</html>

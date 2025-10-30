@@ -1,0 +1,137 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: #F5F5F5;
+}
+
+.navbar {
+  background: linear-gradient(135deg, #ff8a00, #e52e71); 
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.navbar h1 {
+  font-size: 24px;
+  letter-spacing: 1px;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  margin: 0 12px;
+  font-size: 16px;
+  transition: all 0.3s ease-in-out;
+}
+
+.navbar a:hover {
+  transform: scale(1.1);
+  text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8);
+}
+
+.search-bar {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 8px 15px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  backdrop-filter: blur(10px);
+}
+
+.search-bar input {
+  border: none;
+  outline: none;
+  background: transparent;
+  color: white;
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.search-bar img {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.edit-profile-container {
+  width: 60%;
+  background-color: white;
+  padding: 30px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+}
+
+.edit-profile-container h2 {
+  text-align: center;
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.edit-profile-container label {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.edit-profile-container input,
+.edit-profile-container textarea,
+.edit-profile-container select,
+.edit-profile-container button {
+  font-family: 'Poppins', sans-serif;
+}
+
+.edit-profile-container input,
+.edit-profile-container textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+}
+
+.edit-profile-container input[type="file"] {
+  padding: 5px;
+}
+
+.save-btn {
+  background-color: #6a11cb;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+}
+
+.save-btn:hover {
+  background-color: #2575fc;
+}
+
+.footer {
+  margin-top: 50px;
+  text-align: center;
+  font-size: 14px;
+  color: #777;
+}
